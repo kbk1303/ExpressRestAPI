@@ -4,8 +4,9 @@ const cors = require('cors');
 const port = 3000;
 const WebSocket = require('ws');
 const { readFileSync } = require('fs');
-const jsonArray = require('./countries.json');
+jsonArray = require('./countries.json');
 const array = [];
+jsonArray = jsonArray['countries'];
 for(var i in jsonArray)
   array.push(jsonArray[i]);
 //console.log("JSON", jsonArray);
@@ -33,7 +34,7 @@ wss.on('connection', (ws) => {
     [...clients.keys()].forEach((client) => {
       client.send(outbound);
     });
-  },Math.round(Math.random() * (6000 - 500)) + 500)
+  },Math.round(Math.random() * (20000 - 500)) + 500)
 
   ws.on('message', (messageAsString) => {
     const message = JSON.parse(messageAsString);
@@ -72,7 +73,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 
 app.get('/all/countries', (req, res) => {
-  //console.log("data", array)
+  console.log("data", array)
   res.send(array);
 })
 
